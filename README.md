@@ -72,3 +72,10 @@ El servidor se ejecutará en `http://localhost:3000`.
 - Endpoint: `/:shortUrl`
 - Método: `GET`
 - Descripción: Redirige a la URL original asociada a la URL corta.
+
+## Futuras mejoras
+
+- [ ] Registro e inicio de sesión de usuarios.
+- [ ] Almacenamiento de URLs por usuario.
+- [ ] Validación de URLs
+- [ ] Contador de visitas de cada URL
