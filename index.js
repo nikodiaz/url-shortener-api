@@ -1,4 +1,5 @@
 import express from "express"
+import cors from "cors"
 import dotenv from "dotenv"
 import connectDB from "./config/db.js"
 import router from "./routes/urlRoutes.js"
@@ -10,6 +11,9 @@ const port = process.env.PORT || 3000
 
 //Connect to DB
 connectDB()
+
+//Middleware for handling CORS
+app.use(cors())
 
 //Middleware for handling JSON
 app.use(express.json())
