@@ -5,10 +5,10 @@ acortar URLs largas y redirigir a la URL original utilizando el enlace corto gen
 
 ## Índice
 
-- Instalación
-- Configuración
-- Ejecución
-- Endpoints
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Ejecución](#ejecución)
+- [Endpoints](#endpoints)
 
 ## Instalación
 
