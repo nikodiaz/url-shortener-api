@@ -79,3 +79,4 @@ El servidor se ejecutará en `http://localhost:3000`.
 - [ ] Almacenamiento de URLs por usuario.
 - [ ] Validación de URLs
 - [ ] Contador de visitas de cada URL
+- [ ] Generador de QRs para compartir fácilmente las URLs
