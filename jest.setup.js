@@ -13,6 +13,10 @@ beforeAll(async () => {
   });
 });
 
+beforeEach(async () => {
+  await mongoose.connection.db.dropDatabase();
+});
+
 afterAll(async () => {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close(); // Ensure the connection is properly closed
