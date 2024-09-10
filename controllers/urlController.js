@@ -19,11 +19,13 @@ export const shortenUrl = async (req, res) => {
       return res.json({ shortUrl: `${BASE_URL}/${url.shortUrl}` });
     }
     const shortUrl = nanoid(8)
-    const newUrl = new Url({ originalUrl, shortUrl })
-    await newUrl.save()
-
     const fullShortUrl = `${BASE_URL}/${shortUrl}`
     const qrCode = await QRCode.toDataURL(fullShortUrl)
+
+    const newUrl = new Url({ originalUrl, shortUrl, qrCode })
+    await newUrl.save()
+
+
 
     res.json({ shortUrl: fullShortUrl, qrCode })
   } catch (e) {
