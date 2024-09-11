@@ -16,7 +16,7 @@ export const shortenUrl = async (req, res) => {
   try {
     let url = await Url.findOne({ originalUrl });
     if (url) {
-      return res.json({ shortUrl: `${BASE_URL}/${url.shortUrl}` });
+      return res.json({ shortUrl: `${BASE_URL}/${url.shortUrl}`, qrCode: url.qrCode });
     }
     const shortUrl = nanoid(8)
     const fullShortUrl = `${BASE_URL}/${shortUrl}`
