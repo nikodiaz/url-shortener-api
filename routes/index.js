@@ -6,7 +6,7 @@ import urlRouter from "./url.js"
 const router = express.Router()
 
 //Auth
-router.use("/auth", authRouter)
+router.use("/", authRouter)
 //Url
 router.use("/", urlRouter)
 
