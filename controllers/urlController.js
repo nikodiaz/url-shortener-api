@@ -2,7 +2,7 @@ import Url from "../models/Url.js";
 import QRCode from "qrcode"
 import { nanoid } from "nanoid";
 
-const BASE_URL = process.env.BASE_URL || `http://localhost:${process.env.PORT || 3000}`
+const BASE_URL = process.env.BASE_URL
 
 //Controller that handler the bussines logic
 export const shortenUrl = async (req, res) => {
