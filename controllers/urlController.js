@@ -28,8 +28,8 @@ export const shortenUrl = async (req, res) => {
 
 
     res.json({ shortUrl: fullShortUrl, qrCode })
-  } catch (e) {
-    res.status(500).json({ message: `Error al acortar la URL:`, e })
+  } catch (error) {
+    res.status(500).json({ message: `Error al acortar la URL:`, error })
   }
 }
 
@@ -43,7 +43,7 @@ export const redirectUrl = async (req, res) => {
     } else {
       return res.status(404).json({ message: 'URL no encontrada' })
     }
-  } catch (e) {
-    res.status(500).json({ message: 'Error al redirigir a la URL:', e })
+  } catch (error) {
+    res.status(500).json({ message: 'Error al redirigir a la URL:', error })
   }
 }
