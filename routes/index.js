@@ -1,6 +1,6 @@
 import express from "express"
-import authRouter from "./auth"
-import urlRouter from "./url"
+import authRouter from "./auth.js"
+import urlRouter from "./url.js"
 
 
 const router = express.Router()
