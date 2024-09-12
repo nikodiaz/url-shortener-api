@@ -1,4 +1,5 @@
 import Url from "../models/Url.js";
+import { updateVisitsForLink } from "../utils/analytics.js";
 import { generateShortUrl, generateShortUrlForAnonymous } from "../utils/url.js";
 
 //Controller that handler the bussines logic
@@ -34,6 +35,7 @@ export const redirectUrl = async (req, res) => {
   try {
     const url = await Url.findOne({ shortUrl })
     if (url) {
+      updateVisitsForLink(shortUrl)
       return res.redirect(url.originalUrl)
     } else {
       return res.status(404).json({ message: 'URL no encontrada' })
@@ -42,3 +44,5 @@ export const redirectUrl = async (req, res) => {
     res.status(500).json({ message: 'Error al redirigir a la URL:', error })
   }
 }
+
+
