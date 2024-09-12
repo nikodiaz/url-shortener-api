@@ -23,11 +23,11 @@ export const signup = async (req, res) => {
 
     await newUser.save()
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiredIn: "2h" })
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "2h" })
 
     res.status(201).json({ token })
   } catch (error) {
-    res.status(500).json({ message: "Error al registrar el usuario" })
+    res.status(500).json({ message: "Error al registrar el usuario", error })
   }
 }
 
