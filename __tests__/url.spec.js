@@ -2,6 +2,7 @@ import request from "supertest";
 import app from "../index.js";
 import Url from "../models/Url.js";
 import { nanoid } from "nanoid";
+import { generateQr } from "../utils/url.js";
 
 describe("POST /api/shorten", () => {
   it("Should shorten an Url", async () => {
@@ -21,14 +22,18 @@ describe("POST /api/shorten", () => {
 
 describe("GET /:shortUrl", () => {
   it("Should redirect to original URL", async () => {
-    const shortUrl = nanoid(8);
+    const originalUrl = "https://nicolasdiaz.vercel.app/"
+    const shortUrl = nanoid(7)
+    const fullShortUrl = `http://localhost:3000/${shortUrl}`
+    const qrCode = await generateQr(fullShortUrl)
     const url = new Url({
-      originalUrl: "https://nicolasdiaz.vercel.app/",
-      shortUrl
+      originalUrl,
+      shortUrl,
+      qrCode
     })
     await url.save()
 
-    const res = await request(app).get("/short123")
+    const res = await request(app).get("/" + shortUrl)
 
     expect(res.statusCode).toEqual(302)
     expect(res.headers.location).toBe("https://nicolasdiaz.vercel.app/")

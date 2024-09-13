@@ -1,25 +1,33 @@
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import app from './index.js';
 
-let mongoServer;
+dotenv.config();
+
+const port = process.env.PORT || 3000
+
+let server
+let mongooseConnection
 
 beforeAll(async () => {
-  mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-
-  await mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-});
-
-beforeEach(async () => {
-  await mongoose.connection.db.dropDatabase();
+  server = app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`)
+  })
+  mongooseConnection = await mongoose.connect(process.env.MONGO_URI);
+  console.log('Conectado a MongoDB');
 });
 
 afterAll(async () => {
-  await mongoose.connection.dropDatabase();
-  await mongoose.connection.close(); // Ensure the connection is properly closed
-  await mongoServer.stop();
-});
+  if (server) {
+    server.close(() => {
+      console.log('Servidor detenido.');
+    });
+  }
+  if (mongoose.connection.readyState === 1) {
+    await mongoose.connection.db.collection('users').deleteMany({
+      email: { $regex: '@example.com$', $options: 'i' },
+    });
 
+    await mongoose.connection.close();
+  }
+});

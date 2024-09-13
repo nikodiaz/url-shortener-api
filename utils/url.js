@@ -15,7 +15,7 @@ export const generateQr = async (url) => {
 
 export const generateShortUrl = async (originalUrl, user) => {
   if (user) {
-    const existingUrl = await Url.findOne({ originalUrl, createdBy: user })
+    const existingUrl = await Url.findOne({ originalUrl })
     if (existingUrl) {
       return existingUrl
     }
@@ -24,8 +24,8 @@ export const generateShortUrl = async (originalUrl, user) => {
   const shortUrl = nanoid(7)
   const fullShortUrl = `${BASE_URL}/${shortUrl}`
 
-  const qrCode = generateQr(fullShortUrl)
-  const newUrl = new Url({ originalUrl, shortUrl, qrCode, createdBy: user || null })
+  const qrCode = await generateQr(fullShortUrl)
+  const newUrl = new Url({ originalUrl, shortUrl, qrCode, user: user || null })
   await newUrl.save()
   return newUrl
 }
