@@ -1,10 +1,11 @@
 import express from "express";
 import { shortenUrl, redirectUrl } from "../controllers/urlController.js";
+import optionalAuthMiddleware from "../middlewares/optionalAuth.js";
 
 const urlRouter = express.Router()
 
 //Endpoints
-router.post('/api/shorten', shortenUrl)
-router.get('/:shortUrl', redirectUrl)
+urlRouter.post('/api/shorten', optionalAuthMiddleware, shortenUrl)
+urlRouter.get('/:shortUrl', redirectUrl)
 
 export default urlRouter

@@ -1,12 +1,12 @@
 import express from "express"
 import dotenv from "dotenv"
-import { signin, signup } from "../controllers/authController"
+import { signin, signup } from "../controllers/authController.js"
 
 dotenv.config()
 
 const authRouter = express.Router()
 
-router.post("/signup", signup)
-router.post("/signin", signin)
+authRouter.post("/api/signup", signup)
+authRouter.post("/api/signin", signin)
 
 export default authRouter
