@@ -14,6 +14,8 @@ export const getTotalVisitsByUser = async (req, res) => {
 export const getLinkVisitsByUser = async (req, res) => {
   const userId = req.user.id
   const { linkId } = req.params
+
+  console.log(linkId, userId)
   try {
     const link = await Url.findOne({ user: userId, _id: linkId })
     if (!link) {
@@ -55,30 +57,30 @@ export const getLinkVisitsByDate = async (req, res) => {
 
 export const getUserVisitsByDate = async (req, res) => {
   try {
-    const userId = req.user.id;
-    const startDate = req.query.startDate ? new Date(req.query.startDate) : new Date("1970-01-01");
-    const endDate = req.query.endDate ? new Date(req.query.endDate) : new Date();
+    const userId = req.user.id
+    const startDate = req.query.startDate ? new Date(req.query.startDate) : new Date("1970-01-01")
+    const endDate = req.query.endDate ? new Date(req.query.endDate) : new Date()
 
     if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
-      return res.status(400).json({ message: "Fechas inválidas proporcionadas" });
+      return res.status(400).json({ message: "Fechas inválidas proporcionadas" })
     }
 
     const userLinks = await Url.find({
       user: userId,
       'visitsByDate.date': { $gte: startDate, $lte: endDate }
-    }).lean();
+    }).lean()
 
     const visitsByDate = userLinks.reduce((acc, link) => {
       link.visitsByDate.forEach(visit => {
-        const date = new Date(visit.date).toISOString().split('T')[0]; // Normalizamos la fecha
-        acc[date] = (acc[date] || 0) + visit.count; // Suma las visitas de cada fecha
-      });
-      return acc;
-    }, {});
+        const date = new Date(visit.date).toISOString().split('T')[0]
+        acc[date] = (acc[date] || 0) + visit.count
+      })
+      return acc
+    }, {})
 
-    res.status(200).json({ visitsByDate });
+    res.status(200).json({ visitsByDate })
   } catch (error) {
-    res.status(500).json({ message: "Error al obtener las visitas por fecha", error });
+    res.status(500).json({ message: "Error al obtener las visitas por fecha", error })
   }
 };
 

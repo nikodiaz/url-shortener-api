@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node --watch index.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --watchAll --runInBand --detectOpenHandles --forceExit"
+    "test": "NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --watchAll --runInBand --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "Nicolás Díaz",

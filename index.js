@@ -24,7 +24,9 @@ app.use("/", router)
 
 //Starts the server
 app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`)
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(`Servidor corriendo en http://localhost:${port}`)
+  }
 })
 
 export default app

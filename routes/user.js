@@ -8,7 +8,7 @@ userRouter.get("/visits_by_date", authMiddleware, getUserVisitsByDate)
 
 userRouter.get("/visits/total", authMiddleware, getTotalVisitsByUser)
 
-userRouter.get("/visits/link/:link", authMiddleware, getLinkVisitsByUser)
+userRouter.get("/visits/link/:linkId", authMiddleware, getLinkVisitsByUser)
 
 userRouter.get("/links/total", authMiddleware, getTotalLinksbyUser)
 
