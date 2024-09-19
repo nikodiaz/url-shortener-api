@@ -82,5 +82,18 @@ export const getUserVisitsByDate = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error al obtener las visitas por fecha", error })
   }
-};
+}
 
+export const getUserLinks = async (req, res) => {
+  const userId = req.user.id
+
+  try {
+    const links = await Url.find({ user: userId })
+    if (!links.length) {
+      return res.status(404).json({ message: " No se encontraron enlaces para este usuario" })
+    }
+    res.status(200).json({ links })
+  } catch (error) {
+    rs.status(500).json({ message: "Error al obtener los enlaces:", error })
+  }
+}

@@ -22,6 +22,7 @@ export const shortenUrl = async (req, res) => {
     res.status(200).json({
       shortUrl: url.shortUrl,
       qrCode: url.qrCode,
+      originalUrl: url.originalUrl,
       ...(user ? {} : { usageLimit: url.usageLimit, usageCount: url.usageCount })
     })
   } catch (error) {

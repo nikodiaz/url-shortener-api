@@ -13,7 +13,8 @@ const urlSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: false },
   visits: { type: Number, default: 0 },
   visitsByDate: [visitsByDateSchema],
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  expiresAt: { type: Date, default: null }
 })
 
 const Url = mongoose.model('Url', urlSchema)
