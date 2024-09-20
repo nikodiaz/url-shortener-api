@@ -90,7 +90,7 @@ export const getUserLinks = async (req, res) => {
   try {
     const links = await Url.find({ user: userId })
     if (!links.length) {
-      return res.status(404).json({ message: " No se encontraron enlaces para este usuario" })
+      return res.status(404).json({ links, message: " No se encontraron enlaces para este usuario" })
     }
     res.status(200).json({ links })
   } catch (error) {
