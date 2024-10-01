@@ -45,7 +45,7 @@ export const signin = async (req, res) => {
       return res.status(400).json({ message: "Contraseña incorrecta" })
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "2h" })
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "24h" })
     res.json({ token })
   } catch (error) {
     return res.status(500).json({ message: "Error al iniciar sesión", error })
